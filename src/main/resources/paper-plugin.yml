@@ -1,0 +1,7 @@
+name: XSpawnX
+version: '${version}'
+main: dev.xspawnx.XSpawnXPlugin
+api-version: '26.2'
+description: Eigener Spawn unabhaengig vom Vanilla-Weltspawn mit /spawn, /setspawn, Spawn beim ersten Join und Respawn am Spawn.
+authors:
+  - Robert

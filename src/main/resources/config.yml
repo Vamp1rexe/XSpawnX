@@ -1,0 +1,44 @@
+# ==========================================
+#  XSpawnX - Konfiguration
+#  Diese Datei erstellt das Plugin beim ersten Start selbst.
+#  Nach Änderungen: /spawn reload
+#
+#  Der Spawn selbst liegt unabhängig vom Vanilla-Weltspawn in der Datei spawn.yml.
+#  Setze ihn mit /setspawn, dort wo du stehst.
+# ==========================================
+
+# Spieler, die zum allerersten Mal joinen, starten am Spawn.
+first-join:
+  enabled: true
+
+# Verhalten beim Tod.
+respawn:
+  enabled: true
+  # true  = Spieler mit Bett oder Respawn-Anker respawnen dort (wie bei Vanilla),
+  #         alle anderen am Spawn.
+  # false = alle Spieler respawnen immer am Spawn, auch mit Bett oder Anker.
+  respect-bed-and-anchor: true
+
+# Einstellungen für den Befehl /spawn.
+# Spieler mit dem Recht xspawnx.bypass ignorieren Wartezeit und Abklingzeit.
+teleport:
+  # Wartezeit in Sekunden, bevor teleportiert wird. 0 = sofort.
+  delay-seconds: 0
+  # Teleport abbrechen, wenn sich der Spieler während der Wartezeit bewegt.
+  cancel-on-move: true
+  # Abklingzeit in Sekunden zwischen zwei Teleports. 0 = keine.
+  cooldown-seconds: 0
+
+# Nachrichten im MiniMessage-Format (https://docs.advntr.dev/minimessage/format.html).
+# Eine leere Nachricht ("") wird nicht gesendet.
+# Platzhalter: <seconds>, <world>, <x>, <y>, <z> (je nach Nachricht).
+messages:
+  teleported: "<green>Du wurdest zum Spawn teleportiert."
+  teleporting: "<yellow>Teleport in <seconds> Sekunden. Bewege dich nicht!"
+  cancelled-move: "<red>Teleport abgebrochen, weil du dich bewegt hast."
+  cooldown: "<red>Du kannst /spawn erst in <seconds> Sekunden wieder benutzen."
+  only-players: "<red>Dieser Befehl ist nur für Spieler."
+  no-permission: "<red>Dazu hast du keine Berechtigung."
+  spawn-missing: "<red>Es ist noch kein Spawn gesetzt. Ein Admin muss /setspawn benutzen."
+  spawn-set: "<green>Spawn gesetzt auf <x> <y> <z> in der Welt <world>."
+  reload-done: "<green>Konfiguration neu geladen."
