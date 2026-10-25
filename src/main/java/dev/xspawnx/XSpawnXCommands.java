@@ -48,6 +48,48 @@ public final class XSpawnXCommands {
 							service.send(ctx.getSource().getSender(), "reload-done");
 							return 1;
 						}))
+				.then(Commands.literal("resetcooldown")
+						.executes(ctx -> {
+							CommandSender sender = ctx.getSource().getSender();
+							if (!sender.hasPermission(XSpawnXPlugin.PERM_RESETCOOLDOWN)) {
+								service.send(sender, "no-permission");
+								return 0;
+							}
+							if (!(sender instanceof Player player)) {
+								service.send(sender, "only-players");
+								return 0;
+							}
+							return reset(service, sender, player);
+						})
+						.then(Commands.argument("player", StringArgumentType.word())
+								.suggests((ctx, builder) -> {
+									if (ctx.getSource().getSender().hasPermission(XSpawnXPlugin.PERM_RESETCOOLDOWN)) {
+										String typed = builder.getRemainingLowerCase();
+										for (Player p : Bukkit.getOnlinePlayers()) {
+											if (p.getName().toLowerCase(Locale.ROOT).startsWith(typed)) {
+												builder.suggest(p.getName());
+											}
+										}
+									}
+									return builder.buildFuture();
+								})
+								.executes(ctx -> {
+									CommandSender sender = ctx.getSource().getSender();
+									if (!sender.hasPermission(XSpawnXPlugin.PERM_RESETCOOLDOWN)) {
+										service.send(sender, "no-permission");
+										return 0;
+									}
+									String name = StringArgumentType.getString(ctx, "player");
+									OfflinePlayer target = Bukkit.getPlayerExact(name);
+									if (target == null) {
+										target = Bukkit.getOfflinePlayerIfCached(name);
+									}
+									if (target == null) {
+										service.send(sender, "player-not-found", Placeholder.unparsed("player", name));
+										return 0;
+									}
+									return reset(service, sender, target);
+								})))
 				.build(), "Teleportiert dich zum Spawn");
 
 		commands.register(Commands.literal("setspawn")
@@ -68,6 +110,16 @@ public final class XSpawnXCommands {
 					return 1;
 				})
 				.build(), "Setzt den Spawn an deine Position");
+	}
+
+	private static int reset(SpawnService service, CommandSender sender, OfflinePlayer target) {
+		String name = target.getName() != null ? target.getName() : target.getUniqueId().toString();
+		if (service.resetCooldown(target.getUniqueId())) {
+			service.send(sender, "cooldown-reset", Placeholder.unparsed("player", name));
+			return 1;
+		}
+		service.send(sender, "cooldown-reset-none", Placeholder.unparsed("player", name));
+		return 0;
 	}
 
 	private static String format(double value) {
