@@ -76,7 +76,10 @@ public final class SpawnService implements Listener {
 		if (!bypass && cooldown > 0) {
 			long left = lastUse.getOrDefault(id, 0L) + cooldown * 1000L - System.currentTimeMillis();
 			if (left > 0) {
-				send(player, "cooldown", Placeholder.unparsed("seconds", String.valueOf((left + 999) / 1000)));
+				long leftSeconds = (left + 999) / 1000;
+				send(player, "cooldown",
+						Placeholder.unparsed("time", formatDuration(leftSeconds)),
+						Placeholder.unparsed("seconds", String.valueOf(leftSeconds)));
 				return;
 			}
 		}
@@ -130,6 +133,24 @@ public final class SpawnService implements Listener {
 		player.teleport(target);
 		lastUse.put(player.getUniqueId(), System.currentTimeMillis());
 		send(player, "teleported");
+		int cooldown = cooldownSeconds(player);
+		if (cooldown > 0 && !player.hasPermission(XSpawnXPlugin.PERM_BYPASS)) {
+			send(player, "cooldown-started", Placeholder.unparsed("time", formatDuration(cooldown)));
+		}
+	}
+
+	/** Formatiert Sekunden als "24 h", "1 h 30 min", "45 min" oder "30 s". */
+	static String formatDuration(long totalSeconds) {
+		long minutes = (totalSeconds + 59) / 60;
+		if (totalSeconds < 60) {
+			return totalSeconds + " s";
+		}
+		long h = minutes / 60;
+		long m = minutes % 60;
+		if (h == 0) {
+			return m + " min";
+		}
+		return m == 0 ? h + " h" : h + " h " + m + " min";
 	}
 
 	private void cancelPending(UUID id) {

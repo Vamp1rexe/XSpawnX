@@ -33,12 +33,13 @@ teleport:
 
 # Nachrichten im MiniMessage-Format (https://docs.advntr.dev/minimessage/format.html).
 # Eine leere Nachricht ("") wird nicht gesendet.
-# Platzhalter: <seconds>, <world>, <x>, <y>, <z> (je nach Nachricht).
+# Platzhalter: <time> (z.B. "24 h" oder "1 h 30 min"), <seconds>, <world>, <x>, <y>, <z> (je nach Nachricht).
 messages:
   teleported: "<green>Du wurdest zum Spawn teleportiert."
   teleporting: "<yellow>Teleport in <seconds> Sekunden. Bewege dich nicht!"
   cancelled-move: "<red>Teleport abgebrochen, weil du dich bewegt hast."
-  cooldown: "<red>Du kannst /spawn erst in <seconds> Sekunden wieder benutzen."
+  cooldown: "<red>Du kannst /spawn erst in <time> wieder benutzen."
+  cooldown-started: "<gray>Dein Cooldown beginnt jetzt: <time>."
   only-players: "<red>Dieser Befehl ist nur für Spieler."
   no-permission: "<red>Dazu hast du keine Berechtigung."
   spawn-missing: "<red>Es ist noch kein Spawn gesetzt. Ein Admin muss /setspawn benutzen."
