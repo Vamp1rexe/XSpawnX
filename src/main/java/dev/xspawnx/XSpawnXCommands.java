@@ -15,7 +15,7 @@ import java.util.Locale;
 /**
  * /spawn           teleportiert zum Spawn (xspawnx.spawn)
  * /spawn reload    lädt die config.yml neu (xspawnx.reload)
- * /spawn resetcooldown <Spieler>  setzt die Abklingzeit zurück (xspawnx.resetcooldown)
+ * /spawn resetcooldown [Spieler]  setzt die Abklingzeit zurück (ohne Name: deine eigene) (xspawnx.resetcooldown)
  * /setspawn        setzt den Spawn an deine Position (xspawnx.setspawn)
  */
 public final class XSpawnXCommands {
