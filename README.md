@@ -12,6 +12,7 @@ Schlankes Spawn-Plugin für **Paper 26.2** mit eigenem Spawn, der den Vanilla-We
 | `/spawn` | Teleportiert zum Spawn. Nur für Ops und Spieler mit dem Recht `xspawnx.spawn`. |
 | `/setspawn` | Setzt den Spawn an deine Position, inklusive Blickrichtung. Recht `xspawnx.setspawn`. |
 | `/spawn reload` | Lädt die `config.yml` neu. Recht `xspawnx.reload`. |
+| `/spawn resetcooldown <Spieler>` | Setzt die Abklingzeit eines Spielers zurück. Recht `xspawnx.resetcooldown`. |
 | Erster Join | Neue Spieler starten am Spawn. |
 | Tod | Ohne Bett und ohne Respawn-Anker respawnt der Spieler am Spawn. Mit Bett oder Anker bleibt alles wie bei Vanilla. |
 
@@ -36,6 +37,7 @@ Alle Rechte sind standardmäßig nur für Ops. Für andere Spieler oder Gruppen 
 | `xspawnx.spawn` | `/spawn` benutzen |
 | `xspawnx.setspawn` | `/setspawn` benutzen |
 | `xspawnx.reload` | `/spawn reload` benutzen |
+| `xspawnx.resetcooldown` | `/spawn resetcooldown` benutzen |
 | `xspawnx.bypass` | Wartezeit und Abklingzeit von `/spawn` ignorieren |
 | `xspawnx.cooldown.<Minuten>` | Abklingzeit von `/spawn` pro Spieler oder Gruppe, z.B. `xspawnx.cooldown.50` = 50 Minuten. Überschreibt `teleport.cooldown-seconds`, bei mehreren Rechten gilt das kleinste, `xspawnx.cooldown.0` = keine. |
 

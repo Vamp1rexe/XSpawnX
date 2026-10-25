@@ -13,6 +13,8 @@ public final class XSpawnXPlugin extends JavaPlugin {
 	public static final String PERM_SETSPAWN = "xspawnx.setspawn";
 	/** /spawn reload benutzen. */
 	public static final String PERM_RELOAD = "xspawnx.reload";
+	/** /spawn resetcooldown benutzen. */
+	public static final String PERM_RESETCOOLDOWN = "xspawnx.resetcooldown";
 	/** Wartezeit und Abklingzeit ignorieren. */
 	public static final String PERM_BYPASS = "xspawnx.bypass";
 
@@ -30,6 +32,7 @@ public final class XSpawnXPlugin extends JavaPlugin {
 		registerPermission(PERM_SPAWN, "Erlaubt /spawn");
 		registerPermission(PERM_SETSPAWN, "Erlaubt /setspawn");
 		registerPermission(PERM_RELOAD, "Erlaubt /spawn reload");
+		registerPermission(PERM_RESETCOOLDOWN, "Erlaubt /spawn resetcooldown");
 		registerPermission(PERM_BYPASS, "Ignoriert Wartezeit und Abklingzeit von /spawn");
 
 		service = new SpawnService(this, store);

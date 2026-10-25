@@ -44,4 +44,7 @@ messages:
   no-permission: "<red>Dazu hast du keine Berechtigung."
   spawn-missing: "<red>Es ist noch kein Spawn gesetzt. Ein Admin muss /setspawn benutzen."
   spawn-set: "<green>Spawn gesetzt auf <x> <y> <z> in der Welt <world>."
+  cooldown-reset: "<green>Cooldown von <player> zurückgesetzt."
+  cooldown-reset-none: "<yellow><player> hat gerade keinen Cooldown."
+  player-not-found: "<red>Spieler <player> wurde nicht gefunden."
   reload-done: "<green>Konfiguration neu geladen."

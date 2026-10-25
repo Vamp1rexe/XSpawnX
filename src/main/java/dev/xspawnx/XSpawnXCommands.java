@@ -1,8 +1,11 @@
 package dev.xspawnx;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +15,7 @@ import java.util.Locale;
 /**
  * /spawn           teleportiert zum Spawn (xspawnx.spawn)
  * /spawn reload    lädt die config.yml neu (xspawnx.reload)
+ * /spawn resetcooldown <Spieler>  setzt die Abklingzeit zurück (xspawnx.resetcooldown)
  * /setspawn        setzt den Spawn an deine Position (xspawnx.setspawn)
  */
 public final class XSpawnXCommands {
@@ -21,7 +25,8 @@ public final class XSpawnXCommands {
 	public static void register(Commands commands, JavaPlugin plugin, SpawnStore store, SpawnService service) {
 		commands.register(Commands.literal("spawn")
 				.requires(src -> src.getSender().hasPermission(XSpawnXPlugin.PERM_SPAWN)
-						|| src.getSender().hasPermission(XSpawnXPlugin.PERM_RELOAD))
+						|| src.getSender().hasPermission(XSpawnXPlugin.PERM_RELOAD)
+						|| src.getSender().hasPermission(XSpawnXPlugin.PERM_RESETCOOLDOWN))
 				.executes(ctx -> {
 					CommandSender sender = ctx.getSource().getSender();
 					if (!(sender instanceof Player player)) {

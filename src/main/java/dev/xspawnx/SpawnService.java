@@ -139,6 +139,11 @@ public final class SpawnService implements Listener {
 		}
 	}
 
+	/** Setzt die Abklingzeit zurück. Gibt true zurück, wenn der Spieler eine aktive Abklingzeit hatte. */
+	public boolean resetCooldown(UUID id) {
+		return lastUse.remove(id) != null;
+	}
+
 	/** Formatiert Sekunden als "24 h", "1 h 30 min", "45 min" oder "30 s". */
 	static String formatDuration(long totalSeconds) {
 		long minutes = (totalSeconds + 59) / 60;
