@@ -33,7 +33,7 @@ teleport:
 
 # Nachrichten im MiniMessage-Format (https://docs.advntr.dev/minimessage/format.html).
 # Eine leere Nachricht ("") wird nicht gesendet.
-# Platzhalter: <time> (z.B. "24 h" oder "1 h 30 min"), <seconds>, <world>, <x>, <y>, <z> (je nach Nachricht).
+# Platzhalter: <time> (z.B. "24h" oder "23h 12min"), <seconds>, <world>, <x>, <y>, <z> (je nach Nachricht).
 messages:
   teleported: "<green>Du wurdest zum Spawn teleportiert."
   teleporting: "<yellow>Teleport in <seconds> Sekunden. Bewege dich nicht!"

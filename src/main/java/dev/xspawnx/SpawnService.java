@@ -144,18 +144,18 @@ public final class SpawnService implements Listener {
 		return lastUse.remove(id) != null;
 	}
 
-	/** Formatiert Sekunden als "24 h", "1 h 30 min", "45 min" oder "30 s". */
+	/** Formatiert Sekunden als "24h", "23h 12min", "45min" oder "30s". */
 	static String formatDuration(long totalSeconds) {
 		long minutes = (totalSeconds + 59) / 60;
 		if (totalSeconds < 60) {
-			return totalSeconds + " s";
+			return totalSeconds + "s";
 		}
 		long h = minutes / 60;
 		long m = minutes % 60;
 		if (h == 0) {
-			return m + " min";
+			return m + "min";
 		}
-		return m == 0 ? h + " h" : h + " h " + m + " min";
+		return m == 0 ? h + "h" : h + "h " + m + "min";
 	}
 
 	private void cancelPending(UUID id) {
