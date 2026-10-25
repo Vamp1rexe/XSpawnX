@@ -37,10 +37,12 @@ Alle Rechte sind standardmäßig nur für Ops. Für andere Spieler oder Gruppen 
 | `xspawnx.setspawn` | `/setspawn` benutzen |
 | `xspawnx.reload` | `/spawn reload` benutzen |
 | `xspawnx.bypass` | Wartezeit und Abklingzeit von `/spawn` ignorieren |
+| `xspawnx.cooldown.<Minuten>` | Abklingzeit von `/spawn` pro Spieler oder Gruppe, z.B. `xspawnx.cooldown.50` = 50 Minuten. Überschreibt `teleport.cooldown-seconds`, bei mehreren Rechten gilt das kleinste, `xspawnx.cooldown.0` = keine. |
 
 ```
 /lp user <Name> permission set xspawnx.spawn true
 /lp group <Gruppe> permission set xspawnx.spawn true
+/lp group <Gruppe> permission set xspawnx.cooldown.50 true
 ```
 
 ## Konfiguration

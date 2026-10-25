@@ -27,6 +27,8 @@ teleport:
   # Teleport abbrechen, wenn sich der Spieler während der Wartezeit bewegt.
   cancel-on-move: true
   # Abklingzeit in Sekunden zwischen zwei Teleports. 0 = keine.
+  # Pro Spieler überschreibbar mit dem Recht xspawnx.cooldown.<Minuten>,
+  # z.B. xspawnx.cooldown.50 = 50 Minuten. Bei mehreren Rechten gilt das kleinste.
   cooldown-seconds: 0
 
 # Nachrichten im MiniMessage-Format (https://docs.advntr.dev/minimessage/format.html).

@@ -13,10 +13,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,6 +26,8 @@ import java.util.UUID;
 public final class SpawnService implements Listener {
 	private record Pending(BukkitTask task, Location start) {
 	}
+
+	private static final String COOLDOWN_PREFIX = "xspawnx.cooldown.";
 
 	private final JavaPlugin plugin;
 	private final SpawnStore store;
@@ -68,7 +72,7 @@ public final class SpawnService implements Listener {
 		boolean bypass = player.hasPermission(XSpawnXPlugin.PERM_BYPASS);
 		UUID id = player.getUniqueId();
 
-		int cooldown = config().getInt("teleport.cooldown-seconds", 0);
+		int cooldown = cooldownSeconds(player);
 		if (!bypass && cooldown > 0) {
 			long left = lastUse.getOrDefault(id, 0L) + cooldown * 1000L - System.currentTimeMillis();
 			if (left > 0) {
@@ -94,6 +98,32 @@ public final class SpawnService implements Listener {
 			}
 		}, delay * 20L);
 		pending.put(id, new Pending(task, player.getLocation()));
+	}
+
+	/**
+	 * Abklingzeit in Sekunden. Hat der Spieler Rechte der Form xspawnx.cooldown.<Minuten>,
+	 * gilt die kleinste davon (xspawnx.cooldown.0 = keine). Sonst gilt teleport.cooldown-seconds.
+	 */
+	private int cooldownSeconds(Player player) {
+		int best = -1;
+		for (PermissionAttachmentInfo info : player.getEffectivePermissions()) {
+			if (!info.getValue()) {
+				continue;
+			}
+			String perm = info.getPermission().toLowerCase(Locale.ROOT);
+			if (!perm.startsWith(COOLDOWN_PREFIX)) {
+				continue;
+			}
+			try {
+				int minutes = Integer.parseInt(perm.substring(COOLDOWN_PREFIX.length()));
+				if (minutes >= 0 && (best < 0 || minutes < best)) {
+					best = minutes;
+				}
+			} catch (NumberFormatException ignored) {
+				// z.B. xspawnx.cooldown.* wird übersprungen
+			}
+		}
+		return best >= 0 ? best * 60 : config().getInt("teleport.cooldown-seconds", 0);
 	}
 
 	private void doTeleport(Player player, Location target) {
